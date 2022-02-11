@@ -2,7 +2,7 @@ import React from 'react'
 import axios from 'axios'
 
 const initialState ={
-  grid: {"x":1, "y":2 },
+  grid: {"x":2, "y":2 },
   counter: 0,
   message: '',
   email: ''
@@ -25,38 +25,98 @@ onSubmit = event => {
   })
 }
 
+componentDidUpdate() {
+  console.log(this.state)
+}
+
+
+moveUp = () => {
+  if (this.state.grid.y > 1) {
+    this.setState({ ...this.state,
+      counter: this.state.counter + 1, 
+      grid: {...this.state.grid, y: this.state.grid.y - 1}, 
+      message: ''});
+    console.log(this.state)
+  }
+  else {
+    this.setState({ ...this.state, message: "Try Another Direction"})
+  }
+}
+
+moveDown = () => {
+  if (this.state.grid.y < 3) {
+    this.setState({ ...this.state,
+      counter: this.state.counter + 1, 
+      grid: { ...this.state.grid, y: this.state.grid.y + 1},
+      message: ''});
+    console.log(this.state)
+  }
+  else {
+    this.setState({ ...this.state, message: "Try Another Direction"})
+  }
+}
+
+moveLeft = () => {
+  if (this.state.grid.x > 1) {
+    this.setState({ ...this.state,
+      counter: this.state.counter + 1, 
+      grid: {...this.state.grid, x: this.state.grid.x - 1},
+      message: ''});
+    console.log(this.state)
+  }
+  else {
+    this.setState({ ...this.state, message: "Try Another Direction"})
+  }
+}
+
+moveRight = () => {
+  if (this.state.grid.x < 3) {
+    this.setState({ ...this.state,
+      counter: this.state.counter + 1, 
+      grid: {...this.state.grid, x: this.state.grid.x + 1},
+      message: ''});
+    console.log(this.state)
+  }
+  else {
+    this.setState({ ...this.state, message: "Try Another Direction"})
+  }
+}
+
+
+
+
   render() {
 
     const { className } = this.props
     return (
       <div id="wrapper" className={className}>
         <div className="info">
-          <h3 id="coordinates">Coordinates (2, 2)</h3>
-          <h3 id="steps">You moved 0 times</h3>
+          <h3 id="coordinates">Coordinates {this.state.grid.x}, {this.state.grid.y} </h3>
+          <h3 id="steps">You moved {this.state.counter} times</h3>
         </div>
         <div id="grid">
-          <div className="square"></div>
-          <div className="square"></div>
-          <div className="square"></div>
-          <div className="square"></div>
-          <div className="square active">B</div>
-          <div className="square"></div>
-          <div className="square"></div>
-          <div className="square"></div>
-          <div className="square"></div>
+          <div className={`${this.state.grid.x == 1 && this.state.grid.y == 1 ? "square active" : "square"}`}>{this.state.grid.x === 1 && this.state.grid.y === 1 ? "B" : ""}</div>
+          <div className={`${this.state.grid.x == 2 && this.state.grid.y == 1 ? "square active" : "square"}`}>{this.state.grid.x === 2 && this.state.grid.y === 1 ? "B" : ""}</div>
+          <div className={`${this.state.grid.x == 3 && this.state.grid.y == 1 ? "square active" : "square"}`}>{this.state.grid.x === 3 && this.state.grid.y === 1 ? "B" : ""}</div>
+          <div className={`${this.state.grid.x == 1 && this.state.grid.y == 2 ? "square active" : "square"}`}>{this.state.grid.x === 1 && this.state.grid.y === 2 ? "B" : ""}</div>
+          <div className={`${this.state.grid.x == 2 && this.state.grid.y == 2 ? "square active" : "square"}`}>{this.state.grid.x === 2 && this.state.grid.y === 2 ? "B" : ""}</div>
+          <div className={`${this.state.grid.x == 3 && this.state.grid.y == 2 ? "square active" : "square"}`}>{this.state.grid.x === 3 && this.state.grid.y === 2 ? "B" : ""}</div>
+          <div className={`${this.state.grid.x == 1 && this.state.grid.y == 3 ? "square active" : "square"}`}>{this.state.grid.x === 1 && this.state.grid.y === 3 ? "B" : ""}</div>
+          <div className={`${this.state.grid.x == 2 && this.state.grid.y == 3 ? "square active" : "square"}`}>{this.state.grid.x === 2 && this.state.grid.y === 3 ? "B" : ""}</div>
+          <div className={`${this.state.grid.x == 3 && this.state.grid.y == 3 ? "square active" : "square"}`}>{this.state.grid.x === 3 && this.state.grid.y === 3 ? "B" : ""}</div>
         </div>
         <div className="info">
-          <h3 id="message"></h3>
+          <h3 id="message">{this.state.message}</h3>
         </div>
         <div id="keypad">
-          <button id="left">LEFT</button>
-          <button id="up">UP</button>
-          <button id="right">RIGHT</button>
-          <button id="down">DOWN</button>
-          <button id="reset">reset</button>
+          <button onClick={this.moveLeft} id="left">LEFT</button>
+          <button onClick={this.moveUp} id="up">UP</button>
+          <button onClick={this.moveRight} id="right">RIGHT</button>
+          <button onClick={this.moveDown} id="down">DOWN</button>
+          <button onClick={() =>{this.setState({...this.state, counter: 0, grid: {"x":2, "y":2}, message: ""})} }id="reset">reset</button>
         </div>
-        <form>
-          <input id="email" type="email" placeholder="type email"></input>
+        <form onSubmit={this.onSubmit}>
+          <input onChange={this.onChange} id="email" type="email" placeholder="type email"></input>
           <input id="submit" type="submit"></input>
         </form>
       </div>
