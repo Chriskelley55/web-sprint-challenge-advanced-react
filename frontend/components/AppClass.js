@@ -1,7 +1,32 @@
 import React from 'react'
+import axios from 'axios'
+
+const initialState ={
+  grid: {"x":1, "y":2 },
+  counter: 0,
+  message: '',
+  email: ''
+}
 
 export default class AppClass extends React.Component {
+
+state = initialState
+
+onSubmit = event => {
+  event.preventDefault()
+  const payload = { "x": this.state.grid.x, "y": this.state.grid.y, "steps": this.state.counter, "email": this.state.email}
+  axios.post('http://localhoust:api/result',payload)
+  .then (resp => {
+    this.setState({...this.state, message: resp.data.message})
+    console.log(this.state)
+  })
+  .catch(err => {
+    console.log(err)
+  })
+}
+
   render() {
+
     const { className } = this.props
     return (
       <div id="wrapper" className={className}>
