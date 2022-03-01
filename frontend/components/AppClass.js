@@ -39,7 +39,7 @@ moveUp = () => {
     console.log(this.state)
   }
   else {
-    this.setState({ ...this.state, message: "Try Another Direction"})
+    this.setState({ ...this.state, message: "You can't go up"})
   }
 }
 
@@ -52,7 +52,7 @@ moveDown = () => {
     console.log(this.state)
   }
   else {
-    this.setState({ ...this.state, message: "Try Another Direction"})
+    this.setState({ ...this.state, message: "You can't go down"})
   }
 }
 
@@ -65,7 +65,7 @@ moveLeft = () => {
     console.log(this.state)
   }
   else {
-    this.setState({ ...this.state, message: "Try Another Direction"})
+    this.setState({ ...this.state, message: "You can't go left"})
   }
 }
 
@@ -78,7 +78,7 @@ moveRight = () => {
     console.log(this.state)
   }
   else {
-    this.setState({ ...this.state, message: "Try Another Direction"})
+    this.setState({ ...this.state, message: "You can't go right"})
   }
 }
 
