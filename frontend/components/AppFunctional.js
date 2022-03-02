@@ -31,7 +31,7 @@ export default function AppFunctional(props) {
       setMessage('');
     }
     else {
-      setMessage("Try Another Direction")
+      setMessage("You can't go up")
     }
   }
 
@@ -42,7 +42,7 @@ export default function AppFunctional(props) {
       setMessage('')
     }
     else {
-      setMessage("Try Another Direction")
+      setMessage("You can't go down")
     }
   }
 
@@ -53,7 +53,7 @@ export default function AppFunctional(props) {
       setMessage('');
      }
      else {
-      setMessage("Try Another Direction")
+      setMessage("You can't go left")
      }
    }
 
@@ -64,7 +64,7 @@ export default function AppFunctional(props) {
       setMessage('');
      }
      else {
-      setMessage("Try Another Direction")
+      setMessage("You can't go right")
      }
    }
   return (
