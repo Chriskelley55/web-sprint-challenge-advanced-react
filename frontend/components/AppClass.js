@@ -15,7 +15,7 @@ state = initialState
 onSubmit = event => {
   event.preventDefault()
   const payload = { "x": this.state.grid.x, "y": this.state.grid.y, "steps": this.state.counter, "email": this.state.email}
-  axios.post('http://localhoust:api/result',payload)
+  axios.post('http://localhost:9000/api/result',payload)
   .then (resp => {
     this.setState({...this.state, message: resp.data.message})
     this.setState({...this.state, email: ''})
@@ -91,7 +91,7 @@ moveRight = () => {
     return (
       <div id="wrapper" className={className}>
         <div className="info">
-          <h3 id="coordinates">{`Coordinates (${this.state.grid.x}, ${this.state.grid.y})`} </h3>
+          <h3 id="coordinates">{`Coordinates (${this.state.grid.x}, ${this.state.grid.y})`}</h3>
           <h3 id="steps">You moved {this.state.counter} {this.state.counter === 1 ? "time" : "times"}</h3>
         </div>
         <div id="grid">

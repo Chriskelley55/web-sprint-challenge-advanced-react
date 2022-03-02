@@ -71,7 +71,7 @@ export default function AppFunctional(props) {
     <div id="wrapper" className={props.className}>
       <div className="info">
         <h3 id="coordinates">Coordinates ({grid.x}, {grid.y})</h3>
-        <h3 id="steps" >You moved {counter} times</h3>
+        <h3 id="steps" >You moved {counter} {counter === 1 ? "time" : "times"}</h3>
       </div>
       <div id="grid">
         <div className={`${grid.x == 1 && grid.y == 1 ? "square active" : "square"}`}>{grid.x === 1 && grid.y === 1 ? "B" : ""}</div>
@@ -92,7 +92,7 @@ export default function AppFunctional(props) {
         <button onClick={moveUp} id="up">UP</button>
         <button onClick={moveRight} id="right">RIGHT</button>
         <button onClick={moveDown} id="down">DOWN</button>
-        <button onClick={() => {setCounter(0), setGrid({"x":2, "y":2}), setMessage('')}}id="reset">reset</button>
+        <button onClick={() => {setCounter(0), setGrid({"x":2, "y":2}), setMessage(''), setEmail('')}}id="reset">reset</button>
       </div>
       <form onSubmit={onSubmit}>
         <input onChange={onChange} value={email} id="email" type="email" placeholder="type email"></input>
