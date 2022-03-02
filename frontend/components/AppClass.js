@@ -18,10 +18,10 @@ onSubmit = event => {
   axios.post('http://localhoust:api/result',payload)
   .then (resp => {
     this.setState({...this.state, message: resp.data.message})
-    console.log(this.state)
+    this.setState({...this.state, email: ''})
   })
   .catch(err => {
-    console.log(err)
+    this.setState({...this.setState, message: err.resp.data.message})
   })
 }
 
@@ -29,6 +29,10 @@ componentDidUpdate() {
   console.log(this.state)
 }
 
+onChange = event => {
+  const {value} = event.target
+  this.setState({...this.state, email:value})
+}
 
 moveUp = () => {
   if (this.state.grid.y > 1) {
@@ -36,7 +40,6 @@ moveUp = () => {
       counter: this.state.counter + 1, 
       grid: {...this.state.grid, y: this.state.grid.y - 1}, 
       message: ''});
-    console.log(this.state)
   }
   else {
     this.setState({ ...this.state, message: "You can't go up"})
@@ -49,7 +52,6 @@ moveDown = () => {
       counter: this.state.counter + 1, 
       grid: { ...this.state.grid, y: this.state.grid.y + 1},
       message: ''});
-    console.log(this.state)
   }
   else {
     this.setState({ ...this.state, message: "You can't go down"})
@@ -62,7 +64,6 @@ moveLeft = () => {
       counter: this.state.counter + 1, 
       grid: {...this.state.grid, x: this.state.grid.x - 1},
       message: ''});
-    console.log(this.state)
   }
   else {
     this.setState({ ...this.state, message: "You can't go left"})
@@ -75,7 +76,6 @@ moveRight = () => {
       counter: this.state.counter + 1, 
       grid: {...this.state.grid, x: this.state.grid.x + 1},
       message: ''});
-    console.log(this.state)
   }
   else {
     this.setState({ ...this.state, message: "You can't go right"})
@@ -91,7 +91,7 @@ moveRight = () => {
     return (
       <div id="wrapper" className={className}>
         <div className="info">
-          <h3 id="coordinates">Coordinates {this.state.grid.x}, {this.state.grid.y} </h3>
+          <h3 id="coordinates">{`Coordinates (${this.state.grid.x}, ${this.state.grid.y})`} </h3>
           <h3 id="steps">You moved {this.state.counter} times</h3>
         </div>
         <div id="grid">
